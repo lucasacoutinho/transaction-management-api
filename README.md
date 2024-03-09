@@ -25,7 +25,7 @@ This document serves as a guide for the Transaction Management API, a Laravel ap
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/transaction-management-api.git
+git clone https://github.com/lucasacoutinho/transaction-management-api.git
 ```
 
 2. Navigate to the project directory:
