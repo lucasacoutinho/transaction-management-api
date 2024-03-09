@@ -50,11 +50,13 @@ COPY .docker/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.con
 
 # Ensure log directory exists for Supervisor, Laravel, and Nginx
 RUN mkdir -p /var/log/supervisor /var/log/nginx && \
-    touch /var/log/cron.log /var/log/php-fpm.log /var/log/laravel_worker.log && \
+    touch /var/log/php-fpm.log /var/log/cron.log /var/log/laravel.log /var/log/laravel_worker.log && \
     chown -R www-data:www-data /var/log
 
 # Copy your Nginx site configuration to replace the default
 COPY .docker/nginx/default.conf /etc/nginx/sites-available/default
+
+RUN chmod +x entrypoint.sh
 
 # Expose port 80 for Nginx
 EXPOSE 80
