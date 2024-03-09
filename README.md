@@ -39,7 +39,7 @@ cd transaction-management-api
 4. Build the Docker images and start the containers:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Usage
