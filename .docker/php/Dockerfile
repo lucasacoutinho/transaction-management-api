@@ -38,7 +38,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html/app
 RUN composer install --quiet --optimize-autoloader \
     && chown -R www-data:www-data /var/www/html/app \
-    && chmod -R 775 /var/www/html/app/storage /var/www/html/app/bootstrap/cache
+    && chmod -R 775 /var/www/html/app/storage /var/www/html/app/bootstrap/cache \
+    && chmod +x /var/www/html/app/entrypoint.sh
 
 # Correct the cron job setup
 RUN echo "* * * * * www-data cd /var/www/html/app && php artisan schedule:run >> /var/log/cron.log 2>&1" > /etc/cron.d/laravel-scheduler \
@@ -55,8 +56,6 @@ RUN mkdir -p /var/log/supervisor /var/log/nginx && \
 
 # Copy your Nginx site configuration to replace the default
 COPY .docker/nginx/default.conf /etc/nginx/sites-available/default
-
-RUN chmod +x entrypoint.sh
 
 # Expose port 80 for Nginx
 EXPOSE 80

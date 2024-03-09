@@ -1,3 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
-php artisan migrate --force
+cd /var/www/html/app/
+
+php artisan migrate --force >> /var/log/laravel.log
