@@ -1,0 +1,64 @@
+name: Account
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/account
+    metadata:
+      groupName: Account
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a new account.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Account name.'
+        required: true
+        example: aut
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      balance:
+        name: balance
+        description: 'Account balance, if not filled defaults to 0, must be at least 0 and have up to two decimal places. Must match the regex /^\d+(\.\d{1,2})?$/. Must be at least 0.'
+        required: true
+        example: 100.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      name: aut
+      balance: 100.0
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |
+          {
+              "id": 1,
+              "name": "Account XPTO",
+              "balance": 10000
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

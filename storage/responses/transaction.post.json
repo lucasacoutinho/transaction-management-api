@@ -1,0 +1,10 @@
+{
+    "id": 1,
+    "sender_id": 1,
+    "receiver_id": 2,
+    "amount": 100,
+    "status": "SCHEDULED",
+    "process_at": "2024-12-31",
+    "created_at": "2024-03-09T11:47:22.000000Z",
+    "updated_at": "2024-03-09T11:47:22.000000Z"
+}

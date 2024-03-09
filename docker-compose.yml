@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  transaction-api:
+    container_name: transaction-api
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    ports:
+      - '80:80'
+    networks:
+      - transaction-network
+    depends_on:
+      - transaction-database
+      - transaction-redis
+
+  transaction-database:
+    container_name: transaction-database
+    image: 'mysql/mysql-server:8.0'
+    restart: unless-stopped
+    tty: true
+    environment:
+        MYSQL_DATABASE: 'transaction'
+        MYSQL_USER: 'transaction'
+        MYSQL_PASSWORD: 'k9kb-d08r-fftz'
+        MYSQL_ROOT_PASSWORD: 'k9kb-d08r-fftz'
+        SERVICE_TAGS: dev
+        SERVICE_NAME: mysql
+    ports:
+        - '3306:3306'
+    volumes:
+        - transaction-data:/var/lib/mysql
+        - .docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh
+    networks:
+        - transaction-network
+
+  transaction-redis:
+    container_name: transaction-redis
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    networks:
+      - transaction-network
+
+networks:
+  transaction-network:
+    driver: bridge
+
+volumes:
+  transaction-data:
